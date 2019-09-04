@@ -1,0 +1,7 @@
+{
+    "sketch": "liquid_display_sample\\liquid_display_sample.ino",
+    "board": "arduino:avr:uno",
+    "port": "COM3",
+    "output": "./build",
+    "programmer": "AVRISP mkII"
+}
