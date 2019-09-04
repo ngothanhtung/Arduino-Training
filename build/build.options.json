@@ -6,6 +6,6 @@
   "hardwareFolders": "C:\\Program Files (x86)\\Arduino\\hardware",
   "otherLibrariesFolders": "C:\\Users\\Tungn\\OneDrive\\Documents\\Arduino\\libraries",
   "runtime.ide.version": "10809",
-  "sketchLocation": "c:\\Working\\Github\\Arduino-Training\\liquid_display_sample\\liquid_display_sample.ino",
+  "sketchLocation": "c:\\Working\\Github\\Arduino-Training\\dht-sample\\dht-sample.ino",
   "toolsFolders": "C:\\Program Files (x86)\\Arduino\\tools-builder,C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr"
 }

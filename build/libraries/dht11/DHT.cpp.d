@@ -1,5 +1,6 @@
-c:\Working\Github\Arduino-Training\build\sketch\liquid_display_sample.ino.cpp.o: \
- c:\Working\Github\Arduino-Training\build\sketch\liquid_display_sample.ino.cpp \
+c:\Working\Github\Arduino-Training\build\libraries\dht11\DHT.cpp.o: \
+ C:\Users\Tungn\OneDrive\Documents\Arduino\libraries\dht11\DHT.cpp \
+ C:\Users\Tungn\OneDrive\Documents\Arduino\libraries\dht11\DHT.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
@@ -10,8 +11,4 @@ c:\Working\Github\Arduino-Training\build\sketch\liquid_display_sample.ino.cpp.o:
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Printable.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/USBAPI.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h \
- C:\Users\Tungn\OneDrive\Documents\Arduino\libraries\LiquidCrystal_I2C/LiquidCrystal_I2C.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Print.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\libraries\Wire\src/Wire.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\variants\standard/pins_arduino.h
