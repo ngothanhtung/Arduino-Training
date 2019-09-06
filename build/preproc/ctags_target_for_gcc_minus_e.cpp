@@ -1,73 +1,140 @@
-# 1 "c:\\Working\\Github\\Arduino-Training\\dht-sample\\dht-sample.ino"
-# 1 "c:\\Working\\Github\\Arduino-Training\\dht-sample\\dht-sample.ino"
-# 2 "c:\\Working\\Github\\Arduino-Training\\dht-sample\\dht-sample.ino" 2
-# 3 "c:\\Working\\Github\\Arduino-Training\\dht-sample\\dht-sample.ino" 2
-LiquidCrystal_I2C lcd(0x3F, 16, 2); // set the LCD address to 0x27 for a 16 chars and 2 line display
+# 1 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino"
+# 1 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino"
+/*
+
+    HTTP over TLS (HTTPS) example sketch
 
 
 
-// Uncomment whatever type you're using!
+    This example demonstrates how to use
 
-//#define DHTTYPE DHT22   // DHT 22  (AM2302)
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
+    WiFiClientSecure class to access HTTPS API.
 
-// Connect pin 1 (on the left) of the sensor to +5V
-// Connect pin 2 of the sensor to whatever your DHTPIN is
-// Connect pin 4 (on the right) of the sensor to GROUND
-// Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
+    We fetch and display the status of
 
-DHT dht(7 /* what pin we're connected to*/, 11 /* DHT 11*/);
+    esp8266/Arduino project continuous integration
+
+    build.
+
+
+
+    Limitations:
+
+      only RSA certificates
+
+      no support of Perfect Forward Secrecy (PFS)
+
+      TLSv1.2 is supported since version 2.4.0-rc1
+
+
+
+    Created by Ivan Grokhotkov, 2015.
+
+    This example is in public domain.
+
+*/
+# 19 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino"
+# 20 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 21 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 22 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 23 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 24 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 25 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 26 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 27 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 28 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 29 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 30 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 31 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 32 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 33 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 34 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 35 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 36 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+# 37 "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" 2
+
+
+
+
+
+
+const char *ssid = "Softech SD";
+const char *password = "softech@38yenbai";
+
+const char *host = "cloud.softech.vn";
+const int httpsPort = 443;
+
+// Use web browser to view and copy
+// SHA1 fingerprint of the certificate
+const char fingerprint[] __attribute__((section( "\".irom.text." "d:\\Working\\GitHub\\Arduino-Training\\wifi-request-sample\\wifi-request-sample.ino" "." "51" "." "0" "\""))) = "5F F1 60 31 09 04 3E F2 90 D2 B0 8A 50 38 04 E8 37 9F BC 76";
 
 void setup()
 {
-  Serial.begin(9600);
-  Serial.println("DHTxx test!");
+  Serial.begin(115200);
+  Serial.println();
+  Serial.print("connecting to ");
+  Serial.println(ssid);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
 
-  dht.begin();
+  // Use WiFiClientSecure class to create TLS connection
+  WiFiClientSecure client;
+  Serial.print("connecting to ");
+  Serial.println(host);
 
-  // LCD
-  // put your setup code here, to run once:
-  lcd.init(); // initialize the lcd
-  // Print a message to the LCD.
-  lcd.begin(16, 2);
-  lcd.backlight();
-  // lcd.print("Xin chao YUMI");
-  // lcd.setCursor(0, 1);
-  // lcd.print("Xin chao JERRY");
+  //Serial.printf("Using fingerprint '%s'\n", fingerprint);
+  //client.setFingerprint(fingerprint);
+
+  if (!client.connect(host, httpsPort))
+  {
+    Serial.println("connection failed");
+    return;
+  }
+
+  String url = "/mobile/ames/api/vocabulary/kite";
+  Serial.print("requesting URL: ");
+  Serial.println(url);
+
+  client.print(String("GET ") + url + " HTTP/1.1\r\n" +
+               "Host: " + host + "\r\n" +
+               "User-Agent: BuildFailureDetectorESP8266\r\n" +
+               "Connection: close\r\n\r\n");
+
+  Serial.println("request sent");
+  while (client.connected())
+  {
+    String line = client.readStringUntil('\n');
+    if (line == "\r")
+    {
+      Serial.println("headers received");
+      break;
+    }
+  }
+  String line = client.readStringUntil('\n');
+  if (line.startsWith("{\"state\":\"success\""))
+  {
+    Serial.println("esp8266/Arduino CI successfull!");
+  }
+  else
+  {
+    Serial.println("esp8266/Arduino CI has failed");
+  }
+  Serial.println("reply was:");
+  Serial.println("==========");
+  Serial.println(line);
+  Serial.println("==========");
+  Serial.println("closing connection");
 }
 
 void loop()
 {
-  // Reading temperature or humidity takes about 250 milliseconds!
-  // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
-  float h = dht.readHumidity();
-  float t = dht.readTemperature();
-
-  // check if returns are valid, if they are NaN (not a number) then something went wrong!
-  if (isnan(t) || isnan(h))
-  {
-    Serial.println("Failed to read from DHT");
-  }
-  else
-  {
-    // Serial.print("Humidity: ");
-    // Serial.print(h);
-    // Serial.print(" %\t");
-    // Serial.print("Temperature: ");
-    // Serial.print(t);
-    // Serial.println(" *C");
-
-    // Do am
-    lcd.setCursor(0, 0);
-    lcd.print("Humidity:");
-    lcd.setCursor(14, 0);
-    lcd.print(h);
-    // Nhiet do
-    lcd.setCursor(0, 1);
-    lcd.print("Temperature:");
-    lcd.setCursor(14, 1);
-    lcd.print(t);
-
-    delay(1000);
-  }
 }

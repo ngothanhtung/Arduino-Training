@@ -1,7 +1,8 @@
 {
-    "board": "arduino:avr:uno",
-    "port": "COM5",
+    "board": "esp8266:esp8266:generic",
+    "port": "COM10",
     "programmer": "AVRISP mkII",
     "output": "./build",
-    "sketch": "dht-sample\\dht-sample.ino"
+    "configuration": "xtal=80,vt=flash,exception=disabled,ssl=all,ResetMethod=nodemcu,CrystalFreq=26,FlashFreq=40,FlashMode=dio,eesz=4M3M,led=2,sdk=nonosdk221,ip=lm2f,dbg=Serial,lvl=None____,wipe=none,baud=921600",
+    "sketch": "wifi-request-sample\\wifi-request-sample.ino"
 }

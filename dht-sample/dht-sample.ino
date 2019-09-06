@@ -57,14 +57,18 @@ void loop()
 
     // Do am
     lcd.setCursor(0, 0);
-    lcd.print("Humidity:");
-    lcd.setCursor(14, 0);
+    lcd.print("H:");
+    lcd.setCursor(3, 0);
     lcd.print(h);
+    lcd.setCursor(9, 0);
+    lcd.print("%");
     // Nhiet do
     lcd.setCursor(0, 1);
-    lcd.print("Temperature:");
-    lcd.setCursor(14, 1);
+    lcd.print("T:");
+    lcd.setCursor(3, 1);
     lcd.print(t);
+    lcd.setCursor(9, 1);
+    lcd.print("oC");
 
     delay(1000);
   }
