@@ -39,8 +39,8 @@
 #include <ESP8266HTTPClient.h>
 
 #ifndef STASSID
-#define STASSID "Softech SD"
-#define STAPSK "softech@38yenbai"
+#define STASSID "FPT Telecom"
+#define STAPSK "147258369"
 #endif
 
 const char *ssid = STASSID;
