@@ -7,8 +7,16 @@ RTC_DS3231 rtc;
 
 char daysOfTheWeek[7][12] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
+// HC-SR04
+#define trigPin 3
+#define echoPin 2
+
 void setup ()
 {
+  //
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+
   lcd.init(); // initialize the lcd
   // Print a message to the LCD.
   lcd.begin(16, 2);
@@ -38,6 +46,22 @@ void setup ()
 }
 
 void loop () {
+  //
+  long duration, distance;
+  digitalWrite(trigPin, LOW);  // Added this line
+  delayMicroseconds(2); // Added this line
+  digitalWrite(trigPin, HIGH);
+
+  delayMicroseconds(10); // Added this line
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = (duration / 2) / 29.1;
+
+  Serial.print("distance: ");
+  Serial.println(distance);
+  delay(500);
+
+  return;
   DateTime now = rtc.now();
 
 
